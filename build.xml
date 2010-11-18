@@ -1,0 +1,45 @@
+<project name="jargparser" default="compile" basedir=".">
+  <description>
+    Jargparser is an argument parser framework for java built using
+    annotations.
+  </description>
+  
+  <!-- Global properties for build file -->
+  <property name="src" location="src" />
+  <property name="classes" location="classes" />
+  <property name="bin" location="bin" />
+  <property name="version" value="0.1" /> 
+
+  <path id="default_classpath">
+    <pathelement path="${classes}" />
+  </path>
+
+  <!-- Initial setup goes here -->
+  <target name="init">
+    <mkdir dir="${classes}" />
+    <mkdir dir="${bin}" />
+  </target>
+
+  <target name="compile" depends="init" description="Compiles code for project">
+    <javac srcdir="${src}" destdir="${classes}" source="1.6">
+      <classpath>
+        <path refid="default_classpath" />
+      </classpath>
+    </javac>
+  </target>
+
+  <!-- Try running clean if the code won't compile after an svn update or other code change -->
+  <target name="clean" description="Remove output class files from previous compilation">
+    <delete>
+      <fileset dir="${classes}" includes="**/*.class" />
+      <fileset dir="${bin}" includes="**/*.jar" />
+    </delete>
+  </target>
+
+  <!-- Use this target to get a fresh build -->
+  <target name="cleancompile" description="Clean and then compile" depends="clean,compile" />
+
+  <target name="create_jar" description="Creates jar package of compiled class files." depends="compile">
+    <jar destfile="${bin}/jargparse_v${version}.jar" basedir="${classes}" excludes="**/.hg" />
+  </target>
+</project>
