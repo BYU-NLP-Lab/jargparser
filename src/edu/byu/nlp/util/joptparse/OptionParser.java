@@ -192,7 +192,7 @@ import edu.byu.nlp.util.joptparse.opthandlers.ZeroArgCallback;
  */
 public class OptionParser {
 
-	private static final String DEFAULT_USAGE = "%prog [options]";
+	public static final String DEFAULT_USAGE = "%prog [options]";
 	public static final boolean DEFAULT_ALLOW_INTERSPERSED_ARGS = true;
 	public static final boolean DEFAULT_ADD_HELP_OPTION = true;
 	public static final boolean DEFAULT_CAMEL_CASE_ALLOWED = false;
