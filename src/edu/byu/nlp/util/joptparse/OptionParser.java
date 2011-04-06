@@ -1408,7 +1408,7 @@ public class OptionParser {
 	 */
 	public final static boolean isOpt(String arg) {
 		// Short option
-		return isLongOpt(arg) || arg.startsWith("-") || arg.startsWith("+") || arg.startsWith("/");
+		return isLongOpt(arg) || arg.startsWith("-") || arg.startsWith("+");
 	}
 	
 	/**
