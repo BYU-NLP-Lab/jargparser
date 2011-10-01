@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.logging.Level;
 
 import edu.byu.nlp.util.Strings;
 import edu.byu.nlp.util.TrieMap;
@@ -141,7 +142,7 @@ import edu.byu.nlp.util.joptparse.opthandlers.ZeroArgCallback;
  * <p>
  * If additional option strings are desired, they can be specified
  * using the <code>optStrings</code> attribute of the <code>@Option</code>
- * annotation. Not, however, that if any options are manually specified
+ * annotation. Note, however, that if any options are manually specified
  * in this fashion, no options are inferred from the variable name.
  * Also note that, due to the way that Java annotations work,
  * if one attribute of an annotation is manually specified, then
@@ -1291,6 +1292,13 @@ public class OptionParser {
 			@Override
 			public File parse(String arg) {
 				return new File(arg);
+			}
+		});
+		
+		parserMap.put(Level.class, new OptionArgumentParser<Level>(){
+			@Override
+			public Level parse(String arg) {
+				return Level.parse(arg);
 			}
 		});
 	}
