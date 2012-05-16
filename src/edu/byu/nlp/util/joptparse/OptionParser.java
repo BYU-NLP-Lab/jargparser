@@ -365,8 +365,8 @@ public class OptionParser {
 		actionMap.put(Option.STORE_CONST,new StoreConst());
 		actionMap.put(Option.STORE_TRUE,new StoreBoolean.True());
 		actionMap.put(Option.STORE_FALSE,new StoreBoolean.False());
-		actionMap.put(Option.APPEND,new AppendConst());
-		actionMap.put(Option.APPEND_CONST,new Append());
+		actionMap.put(Option.APPEND_CONST,new AppendConst());
+		actionMap.put(Option.APPEND,new Append());
 		actionMap.put(Option.COUNT,new Count());
 	}
 
