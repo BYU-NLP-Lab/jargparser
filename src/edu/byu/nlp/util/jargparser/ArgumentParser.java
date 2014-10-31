@@ -211,7 +211,6 @@ public class ArgumentParser {
 	public static final String DEFAULT_USAGE = "%prog [options]";
 	public static final boolean DEFAULT_ALLOW_INTERSPERSED_ARGS = true;
 	public static final boolean DEFAULT_ADD_HELP_OPTION = true;
-	public static final boolean DEFAULT_CAMEL_CASE_ALLOWED = false;
 
 	// The reason for maintaining separate lists has to do with the behavior of collision detection
 	private Map<Character,OptionHandler> shortOpts;
@@ -228,7 +227,6 @@ public class ArgumentParser {
 	private String prog;
 	private boolean allowInterspersedArgs;
 	private int numPos;
-	private boolean camelCaseAllowed;
 	private Map<String,OptionHandlerFactory> actionMap;
 	private boolean exitOnError = true;
 	
@@ -273,7 +271,6 @@ public class ArgumentParser {
 	 * @see #setUsage(String)
 	 * @see #setProg(String)
 	 * @see #setAllowInterspersedArgs(boolean)
-	 * @see #setCamelCaseAllowed(boolean)
 	 */
 	public ArgumentParser(Object optObject) {
 		init(optObject.getClass(), optObject);
@@ -295,7 +292,6 @@ public class ArgumentParser {
 	 * @see #setUsage(String)
 	 * @see #setProg(String)
 	 * @see #setAllowInterspersedArgs(boolean)
-	 * @see #setCamelCaseAllowed(boolean)
 	 */
 	public ArgumentParser(Class<?> cls) {
 		init(cls, null);
@@ -318,7 +314,6 @@ public class ArgumentParser {
 		init(version == null ? null : version.value(), parserOpts == null ? DEFAULT_ADD_HELP_OPTION : parserOpts.addHelpOption());
 		if (parserOpts != null) {
 			setAllowInterspersedArgs(parserOpts.allowInterspersedArgs());
-			setCamelCaseAllowed(parserOpts.allowCamelCase());
 		}
 		
 		if (desc != null)
@@ -349,7 +344,6 @@ public class ArgumentParser {
 		initActions();
 		this.numPos = -1;
 		this.allowInterspersedArgs = DEFAULT_ALLOW_INTERSPERSED_ARGS;
-		this.camelCaseAllowed = DEFAULT_CAMEL_CASE_ALLOWED;
 		
 		if ( addHelpOption ) {
 			// add help option
@@ -869,25 +863,21 @@ public class ArgumentParser {
 	/**
 	 * Convert given field/method name to option string.
 	 * Single character names are treated as short options.
-	 * Converted to camel case if camel case is allowed.
-	 * 
-	 * @see #isCamelCaseAllowed()
 	 */
 	String toOptionString(String name) {
 		String optString;
 		if (name.length() == 1) {
 			optString = "-" + name;
 		} else {
-			if (!camelCaseAllowed) {
-				name = removeCamelCase(name);
-			}
-			optString = "--" + name;
+			optString = "--" + removeCamelCase(name);
 		}
 		return optString;
 	}
 	
 	/**
-	 * Utility that removes the camel case of an identifier
+	 * Utility that takes in camel case words and 
+	 * delimits them with hyphens 
+	 * (e.g., "SomeThingA" -> "some-thing-a") 
 	 */
 	private String removeCamelCase(String name) {
 		StringBuilder sb = new StringBuilder(name.length());
@@ -1489,36 +1479,6 @@ public class ArgumentParser {
 		return mainGroup.remove(opt);
 	}
 	
-	/**
-	 * Query whether camel case should be allowed when adding variables
-	 * that don't explicitly set the <code>optStrings</code> attribute.
-	 * If camel case is not allowed, then variables and methods that are added
-	 * are converted to GNU-like syntax, e.g. aVarName is added as
-	 * "--a-var-name". Otherwise, the options are added as is
-	 * 
-	 * @return whether camel case should be allowed when adding variables
-	 * 
-	 * @see #setCamelCaseAllowed(boolean)
-	 */
-	public boolean isCamelCaseAllowed() {
-		return camelCaseAllowed;
-	}
-
-	/**
-	 * Set whether camel case should be allowed when adding variables
-	 * that don't explicitly set the <code>optStrings</code> attribute.
-	 * If camel case is not allowed, then variables and methods that are added
-	 * are converted to GNU-like syntax, e.g. aVarName is added as
-	 * "--a-var-name". Otherwise, the options are added as is
-	 * 
-	 * @param camelCaseAllowed
-	 * 
-	 * @see #isCamelCaseAllowed()
-	 */
-	public void setCamelCaseAllowed(boolean camelCaseAllowed) {
-		this.camelCaseAllowed = camelCaseAllowed;
-	}
-
 	/**
 	 * Maps primitive types to their wrappers
 	 */

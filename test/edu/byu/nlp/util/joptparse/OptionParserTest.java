@@ -95,14 +95,6 @@ public class OptionParserTest {
 	}
 
 	
-	@Description("This is a test class")
-	@Usage("%prog [options] file1 file2 file3")
-	@Version("0.1alpha")
-	@ParserOptions(addHelpOption=true,allowCamelCase=true,allowInterspersedArgs=true)
-	public static class TestClass {
-		@Option("a strange thing")
-		private int AStrangeThing = -1;
-	}
 
 	/**
 	 * Test method for {@link edu.byu.nlp.util.jargparser.ArgumentParser#parseArgs(java.lang.String[])}.
@@ -252,19 +244,7 @@ public class OptionParserTest {
 		assertEquals(Arrays.asList(1,2,3,4,5),propTest.list);
 	}
 
-	@Test
-	public void testParseArgs12() {
-		final ArgumentParser parser = new ArgumentParser();
-		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-		TestClass test = new TestClass();
-		parser.parseArgs("--AStrangeThing=5");
-		assertEquals(5,test.AStrangeThing);
-//		parser.printHelp();
-		
-//		parser = new OptionParser("%prog 1.0");
-//		parser.parseArgs("--help");
-//		parser.parseArgs("--version");
-	}
+	
 
 	private static void assertFail(Runnable r){
 		try{

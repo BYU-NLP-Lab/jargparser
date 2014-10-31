@@ -50,12 +50,4 @@ public @interface ParserOptions {
 	 */
 	boolean allowInterspersedArgs() default ArgumentParser.DEFAULT_ALLOW_INTERSPERSED_ARGS;
 	
-	/**
-	 * Specifies whether or not camel case is allowed.
-	 * 
-	 * @return true if camel case is allowed
-	 * 
-	 * @see ArgumentParser#isCamelCaseAllowed()
-	 */
-	boolean allowCamelCase() default ArgumentParser.DEFAULT_CAMEL_CASE_ALLOWED;
 }
