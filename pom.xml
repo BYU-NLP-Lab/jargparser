@@ -4,10 +4,10 @@
 	<parent>
 		<groupId>edu.byu.nlp</groupId>
 		<artifactId>byunlp-maven-base</artifactId>
-		<version>LATEST</version>
+		<version>1.0-SNAPSHOT</version>
 		<relativePath>../byunlp-maven-base</relativePath>
 	</parent>
-
+	
 	<artifactId>jargparser</artifactId>
 	<version>0.3-SNAPSHOT</version>
 	<name>jargparser</name>
