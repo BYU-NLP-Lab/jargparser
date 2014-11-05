@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package edu.byu.nlp.util.joptparse;
+package edu.byu.nlp.util.jargparser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

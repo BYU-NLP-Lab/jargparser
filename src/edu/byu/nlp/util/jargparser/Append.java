@@ -53,16 +53,25 @@ class Append implements OptionHandlerFactory {
 			Class<?> innerType;
 			
 			if ( numArgs > 1 ) {
-				Type type = ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0];
-				if ( !(type instanceof GenericArrayType) )
-					throw new IllegalArgumentException("Can only append one-dimensional arrays when using multiple arguments");
-				Type gct = ((GenericArrayType)type).getGenericComponentType();
-				
-				if ( !(gct instanceof Class<?>) || ((Class<?>)gct).isArray() )
-					throw new IllegalArgumentException("Can only append one-dimensional arrays when using multiple arguments");
-					
-				innerType = (Class<?>) gct;
+				// appending a collection
+				Type type = ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0]; // a collection only has one type (hence the [0])
+				// note(pfelt): this code appears to be intended to get the class value from something  
+				// like List<Integer[]>, but does not succeed. Even if the correct type is returned, 
+				// subsequent code is broken. Looks like a feature that wasn't fully implemented or 
+				// the reflection API has since broken it. For now I'm passing back type information 
+				// assuming something like List<Integer> for appending lists. That's maybe less 
+				// elegant, but it is currently working (see OptionParserTest.testParseArgs6())
+//				if ( !(type instanceof GenericArrayType) )
+//					throw new IllegalArgumentException("Can only append one-dimensional arrays when using multiple arguments");
+//				Type gct = ((GenericArrayType)type).getGenericComponentType();
+//				
+//				if ( !(gct instanceof Class<?>) || ((Class<?>)gct).isArray() )
+//					throw new IllegalArgumentException("Can only append one-dimensional arrays when using multiple arguments");
+//					
+//				innerType = (Class<?>) gct;
+				innerType = (Class<?>) type;
 			} else {
+				// appending a single arg
 				try {
 					innerType = (Class<?>) ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0];
 				} catch (Exception e) {
