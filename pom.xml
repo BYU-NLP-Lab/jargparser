@@ -9,7 +9,7 @@
 	</parent>
 	
 	<artifactId>jargparser</artifactId>
-	<version>0.3-SNAPSHOT</version>
+	<version>0.3</version>
 	<name>jargparser</name>
 	<description>A Java command-line parser inspired by Python's argparse and optparse packages, but implemented using Java annotations. Easy to use, highly customizable, and full-featured. Apache License 2.0.</description>
 	<build>
