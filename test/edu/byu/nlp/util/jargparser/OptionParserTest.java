@@ -96,178 +96,178 @@ public class OptionParserTest {
 
 	
 
-//	/**
-//	 * Test method for {@link edu.byu.nlp.util.jargparser.ArgumentParser#parseArgs(java.lang.String[])}.
-//	 */
-//	@Test
-//	public void testParseArgs1() {
-//		OptionsTest options = new OptionsTest();
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		parser.addArguments(options);
-//		parser.parseArgs("-n","5","--name","Test","--this-is-a-test","Worked!");
-//		assertEquals(5, options.n);
-//		assertEquals("Test", options.getName());
-//		assertEquals("Worked!", options.getThisIsATest());
-//	}
-//
-//	@Test
-//	public void testParseArgs2() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		parser.addArguments(new Object() {
-//			@Option("number of clusters") int n;
-//			@Option String name;
-//			@Option String thisIsATest;
-//			@Options( { @Option,
-//				@Option(optStrings = "--quiet", action = Option.STORE_FALSE) })
-//			boolean verbose;
-//		});
-//		ArgumentValues args = parser.parseArgs("-n","5","--name","Test","--this-is-a-test","Worked!","--verbose","--quiet");
-//		int n = args.getValue("n");
-//		assertEquals(5,n);
-//		assertEquals("Test",args.getValue("name"));
-//		assertEquals("Worked!",args.getValue("thisIsATest"));
-//		assertFalse((Boolean)args.getValue("verbose"));
-//		assertFalse((Boolean)args.getValue("quiet"));
-////		System.out.println(opts.optionsMap());
-////		opts.properties().list(System.out);
-//	}
-//
-//	@Test
-//	public void testParseArgs3() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		parser.addArguments(new Object(){@Option(help="testing choices",choices={"a","b","c"}) String choice;});
-//		ArgumentValues args = parser.parseArgs("--choice=c");
-//		assertEquals("c",args.getValue("choice"));
-//		assertFail(new Runnable() {
-//			@Override
-//			public void run() {
-//				parser.parseArgs("--choice=d");
-//			}
-//		});
-//	}
-//
-//	@Test
-//	public void testParseArgs4() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		parser.addArguments(new Object(){@Option(help="testing choices",choices={"1","2","3"}) int choice;});
-//		ArgumentValues args = parser.parseArgs("--choice=2");
-//		int c = args.getValue("choice");
-//		assertEquals(2,c);
-//		assertFail(new Runnable() {
-//			@Override
-//			public void run() {
-//				parser.parseArgs("--choice=5");
-//			}
-//		});
-//	}
-//
-//	@Test
-//	public void testParseArgs5() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		parser.addArguments(new Object(){@Option(action=Option.APPEND) List<Integer> t;});
-//		ArgumentValues args = parser.parseArgs("-t3 -t1 -t5".split("\\s"));
-//		assertEquals(Arrays.asList(3,1,5),args.getValue("t"));
-//	}
+	/**
+	 * Test method for {@link edu.byu.nlp.util.jargparser.ArgumentParser#parseArgs(java.lang.String[])}.
+	 */
+	@Test
+	public void testParseArgs1() {
+		OptionsTest options = new OptionsTest();
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		parser.addArguments(options);
+		parser.parseArgs("-n","5","--name","Test","--this-is-a-test","Worked!");
+		assertEquals(5, options.n);
+		assertEquals("Test", options.getName());
+		assertEquals("Worked!", options.getThisIsATest());
+	}
+
+	@Test
+	public void testParseArgs2() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		parser.addArguments(new Object() {
+			@Option("number of clusters") int n;
+			@Option String name;
+			@Option String thisIsATest;
+			@Options( { @Option,
+				@Option(optStrings = "--quiet", action = Option.STORE_FALSE) })
+			boolean verbose;
+		});
+		ArgumentValues args = parser.parseArgs("-n","5","--name","Test","--this-is-a-test","Worked!","--verbose","--quiet");
+		int n = args.getValue("n");
+		assertEquals(5,n);
+		assertEquals("Test",args.getValue("name"));
+		assertEquals("Worked!",args.getValue("thisIsATest"));
+		assertFalse((Boolean)args.getValue("verbose"));
+		assertFalse((Boolean)args.getValue("quiet"));
+//		System.out.println(opts.optionsMap());
+//		opts.properties().list(System.out);
+	}
+
+	@Test
+	public void testParseArgs3() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		parser.addArguments(new Object(){@Option(help="testing choices",choices={"a","b","c"}) String choice;});
+		ArgumentValues args = parser.parseArgs("--choice=c");
+		assertEquals("c",args.getValue("choice"));
+		assertFail(new Runnable() {
+			@Override
+			public void run() {
+				parser.parseArgs("--choice=d");
+			}
+		});
+	}
+
+	@Test
+	public void testParseArgs4() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		parser.addArguments(new Object(){@Option(help="testing choices",choices={"1","2","3"}) int choice;});
+		ArgumentValues args = parser.parseArgs("--choice=2");
+		int c = args.getValue("choice");
+		assertEquals(2,c);
+		assertFail(new Runnable() {
+			@Override
+			public void run() {
+				parser.parseArgs("--choice=5");
+			}
+		});
+	}
+
+	@Test
+	public void testParseArgs5() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		parser.addArguments(new Object(){@Option(action=Option.APPEND) List<Integer> t;});
+		ArgumentValues args = parser.parseArgs("-t3 -t1 -t5".split("\\s"));
+		assertEquals(Arrays.asList(3,1,5),args.getValue("t"));
+	}
 
 	@Test
 	public void testParseArgs6() {
 		final ArgumentParser parser = new ArgumentParser();
 		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-		parser.addArguments(new Object(){@Option(action=Option.APPEND,nargs=3) List<Integer[]> t;});
+		parser.addArguments(new Object(){@Option(action=Option.APPEND,nargs=3) List<Integer> t;});
 		ArgumentValues args = parser.parseArgs("-t3 4 5 -t1 0 -1 -t5 4 6".split("\\s+"));
 		assertEquals(new Integer[]{3,4,5}, ((List<Integer[]>)args.getValue("t")).get(0));
 		assertEquals(new Integer[]{1,0,-1}, ((List<Integer[]>)args.getValue("t")).get(1));
 		assertEquals(new Integer[]{5,4,6}, ((List<Integer[]>)args.getValue("t")).get(2));
 	}
 
-//	@Test
-//	public void testParseArgs7() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		parser.addArguments(new Object(){@Option(action=Option.STORE,nargs=3) List<Integer> t;});
-//		ArgumentValues args = parser.parseArgs("-t3 4 5 -t1 0 -1 -t5 4 6".split("\\s+"));
-//		assertEquals(Arrays.asList(3,4,5,1,0,-1,5,4,6),args.getValue("t"));
-//	}
-//
-//	@Test
-//	public void testParseArgs8() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		parser.addArguments(new Object(){@Option(action=Option.STORE,nargs=3) int[] t;});
-//		ArgumentValues args = parser.parseArgs("-t3 4 5 -t1 0 -1 -t5 4 6".split("\\s+"));
-//		assertTrue(Arrays.equals(new int[]{5,4,6},(int[])args.getValue("t")));
-//	}
-//
-//	@Test
-//	public void testParseArgs9() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.addArguments(new Object(){@Option(action=Option.COUNT) int t;});
-//		ArgumentValues args = parser.parseArgs("".split("\\s+"));
-//		assertEquals(0,args.getValue("t"));
-//		args = parser.parseArgs("-t -t -t".split("\\s+"));
-//		assertEquals(3,args.getValue("t"));
-//	}
-//	
-//	@Test
-//	public void testParseArgs10() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		parser.addArguments(new Object(){@Option(action=Option.COUNT) Integer t;});
-//		ArgumentValues args = parser.parseArgs("-t -t -t".split("\\s+"));
-//		assertEquals(3,args.getValue("t"));
-//		args = parser.parseArgs("-t -t".split("\\s+"));
-//		assertEquals(5,args.getValue("t"));
-//	}
-//
-//	@Test
-//	public void testParseArgs11() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		PropTest propTest = new PropTest();
-//		
-//		parser.addArguments(propTest);
-//		ArgumentValues args = parser.parseArgs("-a5 -b-2".split("\\s+"));
-//		assertEquals(5,propTest.a);
-//		assertEquals(-2,propTest.b);
-//		args = parser.parseArgs("--zero".split("\\s+"));
-//		assertEquals(-1,propTest.a);
-//		args = parser.parseArgs("--single=7.7".split("\\s+"));
-//		assertEquals(7,propTest.a);
-//		args = parser.parseArgs("--full 1 2 3 4 5 -a6 -b2".split("\\s+"));
-//		assertEquals(6,propTest.a);
-//		assertEquals(2,propTest.b);
-//		assertEquals(Arrays.asList(1,2,3,4,5),propTest.list);
-//	}
-//	
-//	private static enum Color {RED,GREEN,BLUE};
-//	private static class EnumOpts{
-//		@Option
-//		private Color color;
-//	}
-//
-//	@Test
-//	public void testParseArgs12() {
-//		final ArgumentParser parser = new ArgumentParser();
-//		parser.setExitOnError(false); // throw exception we can catch so we can test errors
-//		EnumOpts propTest = new EnumOpts();
-//		
-//		parser.addArguments(propTest);
-//		parser.parseArgs("--color=RED");
-//		
-//		assertEquals(propTest.color, Color.RED);
-//		
-//		assertFail(new Runnable() {
-//			@Override
-//			public void run() {
-//				parser.parseArgs("--color=MAUVE");
-//			}
-//		});
-//	}
+	@Test
+	public void testParseArgs7() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		parser.addArguments(new Object(){@Option(action=Option.STORE,nargs=3) List<Integer> t;});
+		ArgumentValues args = parser.parseArgs("-t3 4 5 -t1 0 -1 -t5 4 6".split("\\s+"));
+		assertEquals(Arrays.asList(3,4,5,1,0,-1,5,4,6),args.getValue("t"));
+	}
+
+	@Test
+	public void testParseArgs8() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		parser.addArguments(new Object(){@Option(action=Option.STORE,nargs=3) int[] t;});
+		ArgumentValues args = parser.parseArgs("-t3 4 5 -t1 0 -1 -t5 4 6".split("\\s+"));
+		assertTrue(Arrays.equals(new int[]{5,4,6},(int[])args.getValue("t")));
+	}
+
+	@Test
+	public void testParseArgs9() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.addArguments(new Object(){@Option(action=Option.COUNT) int t;});
+		ArgumentValues args = parser.parseArgs("".split("\\s+"));
+		assertEquals(0,args.getValue("t"));
+		args = parser.parseArgs("-t -t -t".split("\\s+"));
+		assertEquals(3,args.getValue("t"));
+	}
+	
+	@Test
+	public void testParseArgs10() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		parser.addArguments(new Object(){@Option(action=Option.COUNT) Integer t;});
+		ArgumentValues args = parser.parseArgs("-t -t -t".split("\\s+"));
+		assertEquals(3,args.getValue("t"));
+		args = parser.parseArgs("-t -t".split("\\s+"));
+		assertEquals(5,args.getValue("t"));
+	}
+
+	@Test
+	public void testParseArgs11() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		PropTest propTest = new PropTest();
+		
+		parser.addArguments(propTest);
+		ArgumentValues args = parser.parseArgs("-a5 -b-2".split("\\s+"));
+		assertEquals(5,propTest.a);
+		assertEquals(-2,propTest.b);
+		args = parser.parseArgs("--zero".split("\\s+"));
+		assertEquals(-1,propTest.a);
+		args = parser.parseArgs("--single=7.7".split("\\s+"));
+		assertEquals(7,propTest.a);
+		args = parser.parseArgs("--full 1 2 3 4 5 -a6 -b2".split("\\s+"));
+		assertEquals(6,propTest.a);
+		assertEquals(2,propTest.b);
+		assertEquals(Arrays.asList(1,2,3,4,5),propTest.list);
+	}
+	
+	private static enum Color {RED,GREEN,BLUE};
+	private static class EnumOpts{
+		@Option
+		private Color color;
+	}
+
+	@Test
+	public void testParseArgs12() {
+		final ArgumentParser parser = new ArgumentParser();
+		parser.setExitOnError(false); // throw exception we can catch so we can test errors
+		EnumOpts propTest = new EnumOpts();
+		
+		parser.addArguments(propTest);
+		parser.parseArgs("--color=RED");
+		
+		assertEquals(propTest.color, Color.RED);
+		
+		assertFail(new Runnable() {
+			@Override
+			public void run() {
+				parser.parseArgs("--color=MAUVE");
+			}
+		});
+	}
 
 
 	private static void assertFail(Runnable r){
